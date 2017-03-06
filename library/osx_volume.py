@@ -5,6 +5,8 @@ DOCUMENTATION = '''
 ---
 module: osx_volume
 short_description: Set OS X volume level
+description:
+   - Set OS X volume level or mute flag
 options:
     level:
         description:
