@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  gather_facts: no
+  vars:
+    persons:
+      - id: 123
+        props:
+          - type: name
+            val: John
+          - type: surname
+            val: Smith
+      - id: 456
+        props:
+          - type: name
+            val: Jane
+          - type: surname
+            val: Smith
+    my_template: >
+                 {
+                   <% for i in item.props %>
+                     "<< i.type >>": "<< i.val >>"
+                     <% if not loop.last %>,<% endif %>
+                   <% endfor %>
+                 }
+  tasks:
+    - debug: msg="{{ persons | map('template',my_template,from_json=true) | list }}"
